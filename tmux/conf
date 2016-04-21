@@ -1,0 +1,2 @@
+set -g prefix C-t
+unbind C-b
