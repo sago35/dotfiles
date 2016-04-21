@@ -10,8 +10,9 @@ if (0 == scalar @ARGV) {
 }
 
 my $setting = {
-    'tmux/conf' => "$ENV{HOME}/.tmux.conf",
-    'vim/vimrc' => "$ENV{HOME}/.vimrc",
+    'tmux/conf'  => "$ENV{HOME}/.tmux.conf",
+    'vim/vimrc'  => "$ENV{HOME}/.vimrc",
+    'git/config' => "$ENV{HOME}/.gitconfig",
 };
 
 if ($ARGV[0] eq "install") {
