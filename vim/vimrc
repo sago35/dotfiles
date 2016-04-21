@@ -10,3 +10,9 @@ set laststatus=2
 
 set list
 set listchars=trail:\ ,tab:>-,extends:<
+
+set ignorecase
+set hlsearch
+nmap <ESC><ESC> :nohlsearch<cr>
+
+set diffopt=filler,vertical,context:100000
