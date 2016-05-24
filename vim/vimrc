@@ -5,7 +5,7 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-set statusline=[%{&fenc!=''?&fenc:&enc}][%{&ff}]%F%m%r%h%w[%Y]%=[%l,%v][%3p%%]
+"set statusline=[%{&fenc!=''?&fenc:&enc}][%{&ff}]%F%m%r%h%w[%Y]%=[%l,%v][%3p%%]
 set laststatus=2
 
 set list
@@ -39,6 +39,7 @@ call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tomasr/molokai')
+call dein#add('itchyny/lightline.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
