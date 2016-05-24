@@ -3,3 +3,5 @@
 	email = sago35@gmail.com
 [core]
 	editor = vim
+[alias]
+	co = checkout
