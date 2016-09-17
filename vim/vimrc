@@ -13,13 +13,30 @@ set listchars=trail:\ ,tab:>-,extends:<
 
 set ignorecase
 set hlsearch
-nmap <ESC><ESC> :nohlsearch<cr>
 
 set diffopt=filler,vertical,context:100000
 
 set directory=~/.cache/vim/swap
 set backupdir=~/.cache/vim/backup
 set undodir=~/.cache/vim/undo
+
+nmap <ESC><ESC> :nohlsearch<cr>
+
+nmap <DOWN>  :cnext<cr>
+nmap <UP>    :cnext<cr>
+nmap <LEFT>  :colder<cr>
+nmap <RIGHT> :cnewer<cr>
+
+nmap <A-LEFT>  :diffget<cr>
+nmap <A-RIGHT> :diffput<cr>
+nmap <A-DOWN>  ]c
+nmap <A-UP>    [c
+
+nmap <C-W><C-O> :tabe %<cr>
+
+imap <C-]> <C-R>+
+
+vmap / y/<C-R>"<CR>
 
 source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
