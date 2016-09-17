@@ -22,7 +22,7 @@ set undodir=~/.cache/vim/undo
 
 nmap <ESC><ESC> :nohlsearch<cr>
 
-nmap <DOWN>  :cnext<cr>
+nmap <DOWN>  :cprev<cr>
 nmap <UP>    :cnext<cr>
 nmap <LEFT>  :colder<cr>
 nmap <RIGHT> :cnewer<cr>
