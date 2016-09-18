@@ -34,6 +34,13 @@ nmap <A-UP>    [c
 
 nmap <C-W><C-O> :tabe %<cr>
 
+" Mark
+nmap <unique> <silent> g/ <Plug>MarkSet
+vmap <unique> <silent> g/ <Plug>MarkSet
+nmap <unique> <silent> g. <Plug>MarkClear
+nmap <unique> <silent> gr <Plug>MarkRegex
+nmap <unique> <silent> g? :<C-u>call mark#ClearAll()<CR>
+
 imap <C-]> <C-R>+
 
 vmap / y/<C-R>"<CR>

@@ -72,6 +72,28 @@ set guioptions+=a
 " set number した際の行番号は、Hi LineNrで変えることができる
 " 参考 : help highlight-groups
 
+" mark.vim は、 colorshcemeを読み込んだ後にsourceおよび設定が必要となる
+if filereadable($VIM . "/dein/.dein/plugin/mark.vim")
+  source $VIM/dein/.dein/plugin/mark.vim
+  function! DefaultHighlightings()
+    highlight MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+    highlight MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+    highlight MarkWord3  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
+    highlight MarkWord4  ctermbg=Blue     ctermfg=Black  guibg=#6CABDA    guifg=Black
+    highlight MarkWord5  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
+    highlight MarkWord6  ctermbg=Cyan     ctermfg=Black  guibg=#AACCEE    guifg=Black
+    highlight MarkWord7  ctermbg=Green    ctermfg=Black  guibg=#3CB371    guifg=Black
+    highlight MarkWord8  ctermbg=Yellow   ctermfg=Black  guibg=#F0E6AC    guifg=Black
+    highlight MarkWord9  ctermbg=Red      ctermfg=Black  guibg=#FF4500    guifg=Black
+    highlight MarkWord10 ctermbg=Blue     ctermfg=Black  guibg=#1E90FF    guifg=Black
+    highlight MarkWord11 ctermbg=Magenta  ctermfg=Black  guibg=#EE82EE    guifg=Black
+    highlight MarkWord12 ctermbg=Cyan     ctermfg=Black  guibg=#40E0D0    guifg=Black
+  endfunction
+  call DefaultHighlightings()
+  autocmd ColorScheme * call DefaultHighlightings()
+endif
+
+
 au ColorScheme * hi NonText    guibg=NONE guifg=#40F0F0
 au ColorScheme * hi SpecialKey guibg=#404040 guifg=#4080F0
 au ColorScheme * hi DiffChange guifg=NONE
