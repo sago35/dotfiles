@@ -47,5 +47,6 @@ vmap / y/<C-R>"<CR>
 
 source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
+source $VIMLOCAL/syntastic.vimrc
 
 colorscheme molokai
