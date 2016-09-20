@@ -1,0 +1,2 @@
+let $VIMLOCAL = $GOPATH . "/src/github.com/sago35/dotfiles/vim/"
+source $VIMLOCAL/vimrc
