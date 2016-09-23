@@ -4,6 +4,10 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
+set nowrap
+set number
+
+set fileformats=unix,dos
 
 "set statusline=[%{&fenc!=''?&fenc:&enc}][%{&ff}]%F%m%r%h%w[%Y]%=[%l,%v][%3p%%]
 set laststatus=2
@@ -22,8 +26,8 @@ set undodir=~/.cache/vim/undo
 
 nmap <ESC><ESC> :nohlsearch<cr>
 
-nmap <DOWN>  :cprev<cr>
-nmap <UP>    :cnext<cr>
+nmap <DOWN>  :cnext<cr>
+nmap <UP>    :cprev<cr>
 nmap <LEFT>  :colder<cr>
 nmap <RIGHT> :cnewer<cr>
 
