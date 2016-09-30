@@ -5,3 +5,5 @@
 	editor = vim
 [alias]
 	co = checkout
+[ghq]
+	root = ~/dev/src
