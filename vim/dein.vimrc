@@ -4,10 +4,13 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=$VIM/dein/repos/github.com/Shougo/dein.vim
-
-" Required:
-call dein#begin('$VIM/dein')
+if (has('win32'))
+  set runtimepath+=$VIM/dein/repos/github.com/Shougo/dein.vim
+  call dein#begin('$VIM/dein')
+else
+  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+  call dein#begin('~/.vim/dein')
+endif
 
 " Let dein manage dein
 " Required:
