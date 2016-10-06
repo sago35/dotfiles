@@ -4,13 +4,8 @@ if &compatible
 endif
 
 " Required:
-if (has('win32'))
-  set runtimepath+=$VIM/dein/repos/github.com/Shougo/dein.vim
-  call dein#begin('$VIM/dein')
-else
-  set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
-  call dein#begin('~/.vim/dein')
-endif
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+call dein#begin('~/.vim/dein')
 
 " Let dein manage dein
 " Required:
@@ -20,11 +15,11 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('tpope/vim-fugitive')
-call dein#add('tomasr/molokai')
 call dein#add('itchyny/lightline.vim')
 call dein#add('hotchpotch/perldoc-vim')
 call dein#add('fatih/vim-go')
 call dein#add('sago35/mark.vim')
+call dein#add('sago35/molokai')
 call dein#add('scrooloose/syntastic')
 
 " You can specify revision/branch/tag.
