@@ -1,6 +1,8 @@
 [user]
 	name = sago35
 	email = sago35@gmail.com
+[gui]
+	encoding = utf-8
 [core]
 	editor = vim
 [alias]
