@@ -1,0 +1,3 @@
+[submodule "ahk\\tsense-ahk"]
+	path = ahk\\tsense-ahk
+	url = https://github.com/sago35/tsense-ahk.git
