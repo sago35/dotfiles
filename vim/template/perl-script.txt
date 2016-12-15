@@ -4,5 +4,5 @@ use utf8;
 use Term::Encoding qw(term_encoding);
 my $encoding = term_encoding;
 
-binmode STDOUT => "encoding(cp932)";
-binmode STDERR => "encoding(cp932)";
+binmode STDOUT => "encoding($encoding)";
+binmode STDERR => "encoding($encoding)";
