@@ -11,7 +11,8 @@ autocmd BufNewFile *.t  set fileformat=unix
 autocmd BufNewFile *.t  0r $VIMLOCAL/template/perl-test.txt
 
 function! s:pm_template()
-    let path = substitute(expand('%'), '.*lib/', '', 'g')
+    let path = substitute(expand('%'), '\\', '\/', 'g')
+    let path = substitute(path, '.*lib/', '', 'g')
     let path = substitute(path, '[\\/]', '::', 'g')
     let path = substitute(path, '\.pm$', '', 'g')
 
