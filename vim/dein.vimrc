@@ -20,7 +20,6 @@ call dein#add('hotchpotch/perldoc-vim')
 call dein#add('fatih/vim-go')
 call dein#add('sago35/mark.vim')
 call dein#add('sago35/molokai')
-call dein#add('scrooloose/syntastic')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
