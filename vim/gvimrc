@@ -64,6 +64,8 @@ set nomousefocus
 set mousehide
 " ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
 set guioptions+=a
+" 非GUIのタブページラインを使用する
+set guioptions-=e
 
 
 "---------------------------------------------------------------------------
