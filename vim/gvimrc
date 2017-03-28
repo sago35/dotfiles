@@ -73,8 +73,8 @@ set guioptions+=a
 " 参考 : help highlight-groups
 
 " mark.vim は、 colorshcemeを読み込んだ後にsourceおよび設定が必要となる
-if filereadable($HOME . "/.vim/dein/.dein/plugin/mark.vim")
-  source $HOME/.vim/dein/.dein/plugin/mark.vim
+if filereadable($HOME . "/.vim/dein/.cache/_vimrc/.dein/plugin/mark.vim")
+  source $HOME/.vim/dein/.cache/_vimrc/.dein/plugin/mark.vim
   function! DefaultHighlightings()
     highlight MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
     highlight MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
