@@ -56,3 +56,5 @@ source $VIMLOCAL/lightline.vimrc
 source $VIMLOCAL/cscope.vimrc
 
 colorscheme molokai
+
+let g:go_fmt_command="goimports"
