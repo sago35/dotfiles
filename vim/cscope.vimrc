@@ -16,23 +16,23 @@ endif
 
 au BufNewFile,BufRead *.c set cscopetag
 
-nmap <C-Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-Space>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-nmap <C-Space><C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space><C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space><C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space><C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space><C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space><C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-Space><C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-Space><C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+au FileType c,cpp nnoremap <silent> <buffer> <C-Space><C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 function! ReloadCscopeDb ()
   cs kill -1
@@ -50,3 +50,9 @@ function! ReloadCscopeDb ()
 endfunction
 
 nmap <F12> :call ReloadCscopeDb()<cr>
+
+au FileType c,cpp nnoremap <silent> <buffer> gn :tnext<CR>zz
+au FileType c,cpp nnoremap <silent> <buffer> gp :tprevious<CR>zz
+au FileType c,cpp nnoremap <silent> <buffer> g] :pop<CR>
+
+"set cscopequickfix=s-,c-,d-,i-,t-,e-
