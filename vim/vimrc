@@ -55,6 +55,9 @@ source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
 source $VIMLOCAL/cscope.vimrc
 
+let g:netrw_banner = 0
+let g:netrw_sort_sequence='[\/]$'
+
 colorscheme molokai
 
 let g:go_fmt_command="goimports"
