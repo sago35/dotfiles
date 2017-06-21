@@ -99,6 +99,7 @@ endif
 au ColorScheme * hi NonText    guibg=NONE guifg=#40F0F0
 au ColorScheme * hi SpecialKey guibg=#404040 guifg=#4080F0
 au ColorScheme * hi DiffChange guifg=NONE
+au ColorScheme * hi Search     guibg=#858394
 au ColorScheme * hi DiffText   guibg=#784745
 
 colorscheme molokai
