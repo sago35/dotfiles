@@ -54,6 +54,7 @@ source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
 source $VIMLOCAL/cscope.vimrc
+source $VIMLOCAL/go.vimrc
 
 let g:netrw_banner = 0
 let g:netrw_sort_sequence='[\/]$'
