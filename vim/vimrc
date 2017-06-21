@@ -34,8 +34,8 @@ nmap <RIGHT> :cnewer<cr>
 
 nmap <A-LEFT>  :diffget<cr>
 nmap <A-RIGHT> :diffput<cr>
-nmap <A-DOWN>  ]c
-nmap <A-UP>    [c
+nmap <A-DOWN>  ]czz
+nmap <A-UP>    [czz
 
 nmap <C-W><C-O> :tabe %<cr>
 
