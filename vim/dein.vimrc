@@ -21,6 +21,7 @@ call dein#add('fatih/vim-go')
 call dein#add('sago35/mark.vim')
 call dein#add('sago35/molokai')
 call dein#add('sago35/yankrev.vim')
+call dein#add('cocopon\vaffle.vim')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
