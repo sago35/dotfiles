@@ -21,9 +21,9 @@ set hlsearch
 
 set diffopt=filler,vertical,context:100000
 
-set directory=~/.cache/vim/swap
-set backupdir=~/.cache/vim/backup
-set undodir=~/.cache/vim/undo
+set directory=~/.vim/swap
+set backupdir=~/.vim/backup
+set undodir=~/.vim/undo
 
 nmap <ESC><ESC> :nohlsearch<cr>
 
