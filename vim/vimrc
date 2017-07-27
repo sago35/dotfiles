@@ -64,3 +64,15 @@ let g:netrw_dirhistmax=0
 colorscheme molokai
 
 let g:go_fmt_command="goimports"
+
+function! MkdirInit()
+    if !isdirectory(&directory)
+        call mkdir(&directory)
+    endif
+    if !isdirectory(&backupdir)
+        call mkdir(&backupdir)
+    endif
+    if !isdirectory(&undodir)
+        call mkdir(&undodir)
+    endif
+endfunction
