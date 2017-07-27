@@ -50,6 +50,7 @@ imap <C-]> <C-R>+
 
 vmap / y/<C-R>"<CR>
 
+"set rtp^=.
 source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
@@ -58,6 +59,7 @@ source $VIMLOCAL/go.vimrc
 
 let g:netrw_banner = 0
 let g:netrw_sort_sequence='[\/]$'
+let g:netrw_dirhistmax=0
 
 colorscheme molokai
 
