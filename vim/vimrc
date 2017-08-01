@@ -63,8 +63,6 @@ let g:netrw_dirhistmax=0
 
 colorscheme molokai
 
-let g:go_fmt_command="goimports"
-
 function! MkdirInit()
     if !isdirectory(&directory)
         call mkdir(&directory)
@@ -76,3 +74,7 @@ function! MkdirInit()
         call mkdir(&undodir)
     endif
 endfunction
+
+" ctrlp
+let g:ctrlp_regexp = 1
+let g:ctrlp_working_path_mode = '0'

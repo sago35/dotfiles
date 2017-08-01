@@ -8,3 +8,4 @@ au FileType go nnoremap <silent> <buffer> [d :GoDescribe<CR><C-w>k
 
 let g:go_list_height = 10
 let g:go_list_type = "quickfix"
+let g:go_fmt_command="goimports"
