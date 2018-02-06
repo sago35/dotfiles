@@ -103,3 +103,5 @@ au ColorScheme * hi Search     guibg=#858394
 au ColorScheme * hi DiffText   guibg=#784745
 
 colorscheme molokai
+
+set renderoptions=type:directx
