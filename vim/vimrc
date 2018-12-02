@@ -1,5 +1,11 @@
 scriptencoding utf-8
 
+set fileencodings=utf-8,cp932
+syntax enable
+filetype plugin indent on 
+set guioptions=M
+set backspace=indent,eol,start
+
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -51,7 +57,7 @@ imap <C-]> <C-R>+
 vmap / y/<C-R>"<CR>
 
 "set rtp^=.
-source $VIMLOCAL/dein.vimrc
+"source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
 source $VIMLOCAL/cscope.vimrc
@@ -80,3 +86,5 @@ endfunction
 " ctrlp
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = '0'
+
+set grepprg=git\ grep\ -n\ -P
