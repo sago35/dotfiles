@@ -8,7 +8,14 @@ volt での設定例
 管理者権限じゃないと vim-go のインストールがこける  
 
 ```
-go get github.com/vim-volt/volt
+cd path/to/install_dir
+copy %GOPATH%\src\github.com\sago35\dotfiles\vim\init\* .
+
+go get -u -v github.com/koron/netupvim
+echo source = "vim.org" > netupvim.ini
+
+go get -u -v github.com/mattn/sudo
+go get -u -v github.com/vim-volt/volt
 
 volt get tpope/vim-fugitive
 volt get itchyny/lightline.vim
