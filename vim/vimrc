@@ -89,3 +89,24 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = '0'
 
 set grepprg=git\ grep\ -n\ -P
+
+" vim-lsp / gopls
+let g:go_def_mapping_enabled = 0
+if executable('gopls')
+  augroup LspGo
+    au!
+    autocmd User lsp_setup call lsp#register_server({
+        \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+
+    autocmd FileType go setlocal omnifunc=lsp#complete
+    autocmd FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
+    autocmd FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
+    autocmd FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+    autocmd FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+    autocmd FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| LspDefinition<cr>
+    autocmd FileType go nnoremap <buffer> <silent> <C-w>] :split \| LspDefinition<cr>
+  augroup END
+endif
