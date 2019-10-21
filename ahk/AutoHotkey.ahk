@@ -105,7 +105,14 @@ PrintScreen::
 
 #IfWinActive タスク ビュー
 LCtrl::LCtrl
-LCtrl Up::Send, {Enter}
+LCtrl Up::
+    Send, {Enter}
+    WinWait, , , 2, タスク ビュー
+    WinGetPos, x, y, w, h, A
+    x := x + w / 2
+    y := y + h / 2
+    MouseMove, %x%, %y%, 10
+    return
 ^h::Send, {Left}
 ^j::Send, {Down}
 ^k::Send, {Up}
