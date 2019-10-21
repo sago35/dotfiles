@@ -1,11 +1,12 @@
 scriptencoding utf-8
 
+set fileencodings=utf-8
 set encoding=utf-8
-set fileencodings=utf-8,cp932
 syntax enable
 filetype plugin indent on 
 set guioptions=M
 set backspace=indent,eol,start
+set incsearch
 
 set tabstop=4
 set softtabstop=4
@@ -14,8 +15,11 @@ set expandtab
 set nowrap
 set number
 set scrolloff=0
+set errorformat+=%f
+set efm^=%f:%l\\\,%c:%m
 
 set fileformats=unix,dos
+set updatetime=300
 
 "set statusline=[%{&fenc!=''?&fenc:&enc}][%{&ff}]%F%m%r%h%w[%Y]%=[%l,%v][%3p%%]
 set laststatus=2
@@ -26,16 +30,18 @@ set listchars=trail:\ ,tab:>-,extends:<
 set ignorecase
 set hlsearch
 
-set diffopt=filler,vertical,context:100000
+set diffopt=internal,filler,vertical,context:100000,algorithm:patience
 
 set directory=~/.vim/swap
 set backupdir=~/.vim/backup
 set undodir=~/.vim/undo
 
+set ambiwidth=double
+
 nmap <ESC><ESC> :nohlsearch<cr>
 
-nmap <DOWN>  :cnext<cr>
-nmap <UP>    :cprev<cr>
+nmap <DOWN>  :cnext<cr>zz
+nmap <UP>    :cprev<cr>zz
 nmap <LEFT>  :colder<cr>
 nmap <RIGHT> :cnewer<cr>
 
@@ -87,26 +93,227 @@ endfunction
 " ctrlp
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_user_command = 'git ls-files'
+
+" gitk???J??
+function! OpenGitk ()
+    silent! !perl -e "exec qw(gitk)"
+endfunction
+
+function! OpenGitkAll ()
+    silent! !perl -e "exec qw(gitk --all)"
+endfunction
+
+command! Gitk call OpenGitkAll()
 
 set grepprg=git\ grep\ -n\ -P
 
-" vim-lsp / gopls
-let g:go_def_mapping_enabled = 0
-if executable('gopls')
-  augroup LspGo
-    au!
-    autocmd User lsp_setup call lsp#register_server({
-        \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
-        \ 'whitelist': ['go'],
-        \ })
 
-    autocmd FileType go setlocal omnifunc=lsp#complete
-    autocmd FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
-    autocmd FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
-    autocmd FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
-    autocmd FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
-    autocmd FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| LspDefinition<cr>
-    autocmd FileType go nnoremap <buffer> <silent> <C-w>] :split \| LspDefinition<cr>
-  augroup END
+
+" mkpped
+"set diffexpr=MyDiff()
+function! MyDiff()
+    silent execute "!git_diff_normal_format.pl " v:fname_in . " " . v:fname_new .  " > " . v:fname_out
+endfunction
+
+function! PreproDiff()
+    hi DiffAdd term=bold ctermbg=9 guibg=#333333 guifg=#555555
+    silent execute "!copy " . expand("%:p") . ".ed" . " " . 'c:\takasago\dev\src\atcserver.com\others\MkPped\out.txt'
+    silent execute "diffsplit " . expand("%") . ".pped"
+endfunction
+
+set isfname-==
+
+
+function! Bash ()
+    silent! terminal ++close "c:\Program Files\Git\bin\bash.exe"
+endfunction
+command! Bash call Bash()
+
+function! PowerShell ()
+    silent! terminal ++close "powershell"
+endfunction
+command! PowerShell call PowerShell()
+
+set termwinscroll=100000
+"set termwinsize=25x0
+
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+" mattn/gbhtml
+function! s:clipboard_html(...) abort
+  let l:org_number = &number
+  let enc = &fileencoding
+
+  if enc == 'cp932'
+      set fenc=utf8
+  endif
+
+  setlocal nonumber
+  '<,'>TOhtml
+  %!cbhtml
+  bw!
+  let &number = l:org_number
+
+  if enc == 'cp932'
+      set fenc=cp932
+  endif
+endfunction
+
+xnoremap <silent> <plug>(clipboard-html) :<c-u>call <sid>clipboard_html()<cr>
+xmap <leader>C <plug>(clipboard-html)
+
+au BufNewFile,BufRead *.asc setf canoelog
+au BufNewFile,BufRead *.mhx setf srec
+
+" rust
+
+let g:rustfmt_autosave = 1
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["ruby", "php"],
+    \ "passive_filetypes": ["c", "perl"] }
+
+" tagbar
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" vim-lsp
+if executable('gopls')
+    augroup LspGo
+        au!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'go-lang',
+        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+                    \ 'whitelist': ['go'],
+                    \ })
+        autocmd FileType go setlocal omnifunc=lsp#complete
+    augroup END
+
+   "au FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> <C-w>] :split \| :LspDefinition<cr>
+   "au FileType go nnoremap <buffer> <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+
+   "nmap <silent> <Leader>d :LspDefinition<CR>
+   "nmap <silent> <Leader>p :LspHover<CR>
+   "nmap <silent> <Leader>r :LspReferences<CR>
+   "nmap <silent> <Leader>i :LspImplementation<CR>
+   "nmap <silent> <Leader>s :split \| :LspDefinition <CR>
+   "nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+
+   "nnoremap <silent> gd :LspDefinition<cr>
+   "nnoremap <silent> <C-]> :LspDefinition<cr>
+   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+   "nnoremap <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+   "nnoremap <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+   "nnoremap <silent> <C-w>] :split \| :LspDefinition<cr>
+   "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+
+   "nnoremap <silent> gd :GoDef<cr>
+   "nnoremap <silent> <C-]> :GoDef<cr>
+   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:GoDef<cr>
+   "nnoremap <silent> g<LeftMouse> <LeftMouse>:GoDef<cr>
+   "nnoremap <silent> <C-w><C-]> :<C-u>call go#def#Jump("split")<CR>
+   "nnoremap <silent> <C-w>] :<C-u>call go#def#Jump("split")<CR>
+    "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
 endif
+
+"let g:lsp_async_completion = 0
+
+
+" clangd
+let $PATH = 'C:\LLVM\bin;' . $PATH
+"let g:lsp_log_verbose = 1
+"call ch_logfile("vim-ch.log", "w")
+
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                    \ 'blacklist': ['opc'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType objc setlocal omnifunc=lsp#complete
+        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+    augroup END
+endif
+
+
+" jdt-language-server
+if executable('java') && filereadable(expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'))
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'eclipse.jdt.ls',
+        \ 'cmd': {server_info->[
+        \     'java',
+        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+        \     '-Dosgi.bundles.defaultStartLevel=4',
+        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
+        \     '-Dlog.level=ALL',
+        \     '-noverify',
+        \     '-Dfile.encoding=UTF-8',
+        \     '-Xmx1G',
+        \     '-jar',
+        \     expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'),
+        \     '-configuration',
+        \     expand('~/lsp/eclipse.jdt.ls/config_win'),
+        \     '-data',
+        \     getcwd()
+        \ ]},
+        \ 'whitelist': ['java'],
+        \ })
+    autocmd FileType java setlocal omnifunc=lsp#complete
+endif
+
+
+let g:lsp_use_event_queue = 0
+let g:lsp_highlights_enabled = 0
+let g:lsp_highlight_references_enabled = 0
+let g:lsp_diagnostics_echo_cursor=1
+
+nmap ,i :LspHover<cr>
+nmap <C-]> :LspDefinition<cr>
+nmap <C-w><C-]> :sp<cr>:LspDefinition<cr>
+
+autocmd FileType ahk setl filetype=autohotkey
