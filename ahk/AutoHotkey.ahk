@@ -77,24 +77,47 @@ PrintScreen::
     Send, %A_YYYY%/%A_MM%/%A_DD%
     return
 
+;; ------------------------------------------------------------------------------
+;; cltc
+;; vk1Dsc07B : 無変換
+;^vk1Dsc07B::
+;    ; 常駐モード
+;    Run, ..\cltc\cltc.exe
+;    WinWaitActive, ahk_class CLTCMainWindow, , 1
+;    If (ErrorLevel) {
+;        ; time out
+;    } else {
+;        Send, ^a
+;    }
+;    return
+;
+;#IfWinActive ahk_class CLTCMainWindow
+;LCtrl::LCtrl
+;LCtrl Up::Send, {Enter}
+;#IfWinActive
+
 ; ------------------------------------------------------------------------------
-; cltc
+; Win + TAB
 ; vk1Dsc07B : 無変換
 ^vk1Dsc07B::
-    ; 常駐モード
-    Run, ..\cltc\cltc.exe
-    WinWaitActive, ahk_class CLTCMainWindow, , 1
-    If (ErrorLevel) {
-        ; time out
-    } else {
-        Send, ^a
-    }
+    Send {LWin down}{TAB}{LWin up}
     return
 
-#IfWinActive ahk_class CLTCMainWindow
+#IfWinActive タスク ビュー
 LCtrl::LCtrl
 LCtrl Up::Send, {Enter}
+^h::Send, {Left}
+^j::Send, {Down}
+^k::Send, {Up}
+^l::Send, {Right}
+
+^b::Send, {Left}
+^n::Send, {Down}
+^p::Send, {Up}
+^f::Send, {Right}
+^TAB::Send, {TAB}
 #IfWinActive
+
 
 ; ------------------------------------------------------------------------------
 ; fenrir
