@@ -68,6 +68,7 @@ vmap / y/<C-R>"<CR>
 source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
 source $VIMLOCAL/cscope.vimrc
+source $VIMLOCAL/200-lsp.vim
 source $VIMLOCAL/go.vimrc
 
 let g:loaded_netrw       = 1
@@ -212,48 +213,48 @@ let g:tagbar_type_go = {
 \ }
 
 " vim-lsp
-if executable('gopls')
-    augroup LspGo
-        au!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'go-lang',
-        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
-                    \ 'whitelist': ['go'],
-                    \ })
-        autocmd FileType go setlocal omnifunc=lsp#complete
-    augroup END
-
-   "au FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| :LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> <C-w>] :split \| :LspDefinition<cr>
-   "au FileType go nnoremap <buffer> <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
-
-   "nmap <silent> <Leader>d :LspDefinition<CR>
-   "nmap <silent> <Leader>p :LspHover<CR>
-   "nmap <silent> <Leader>r :LspReferences<CR>
-   "nmap <silent> <Leader>i :LspImplementation<CR>
-   "nmap <silent> <Leader>s :split \| :LspDefinition <CR>
-   "nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
-
-   "nnoremap <silent> gd :LspDefinition<cr>
-   "nnoremap <silent> <C-]> :LspDefinition<cr>
-   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
-   "nnoremap <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
-   "nnoremap <silent> <C-w><C-]> :split \| :LspDefinition<cr>
-   "nnoremap <silent> <C-w>] :split \| :LspDefinition<cr>
-   "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
-
-   "nnoremap <silent> gd :GoDef<cr>
-   "nnoremap <silent> <C-]> :GoDef<cr>
-   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:GoDef<cr>
-   "nnoremap <silent> g<LeftMouse> <LeftMouse>:GoDef<cr>
-   "nnoremap <silent> <C-w><C-]> :<C-u>call go#def#Jump("split")<CR>
-   "nnoremap <silent> <C-w>] :<C-u>call go#def#Jump("split")<CR>
-    "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
-endif
+"if executable('gopls')
+"    augroup LspGo
+"        au!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+"                    \ 'whitelist': ['go'],
+"                    \ })
+"        autocmd FileType go setlocal omnifunc=lsp#complete
+"    augroup END
+"
+"   "au FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-w>] :split \| :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"
+"   "nmap <silent> <Leader>d :LspDefinition<CR>
+"   "nmap <silent> <Leader>p :LspHover<CR>
+"   "nmap <silent> <Leader>r :LspReferences<CR>
+"   "nmap <silent> <Leader>i :LspImplementation<CR>
+"   "nmap <silent> <Leader>s :split \| :LspDefinition <CR>
+"   "nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+"
+"   "nnoremap <silent> gd :LspDefinition<cr>
+"   "nnoremap <silent> <C-]> :LspDefinition<cr>
+"   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "nnoremap <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "nnoremap <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+"   "nnoremap <silent> <C-w>] :split \| :LspDefinition<cr>
+"   "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"
+"   "nnoremap <silent> gd :GoDef<cr>
+"   "nnoremap <silent> <C-]> :GoDef<cr>
+"   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:GoDef<cr>
+"   "nnoremap <silent> g<LeftMouse> <LeftMouse>:GoDef<cr>
+"   "nnoremap <silent> <C-w><C-]> :<C-u>call go#def#Jump("split")<CR>
+"   "nnoremap <silent> <C-w>] :<C-u>call go#def#Jump("split")<CR>
+"    "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"endif
 
 "let g:lsp_async_completion = 0
 
@@ -264,56 +265,52 @@ let $PATH = 'C:\LLVM\bin;' . $PATH
 "call ch_logfile("vim-ch.log", "w")
 
 "let g:lsp_log_file = expand('~/vim-lsp.log')
-if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
-                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-                    \ 'blacklist': ['opc'],
-                    \ })
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
-        autocmd FileType objc setlocal omnifunc=lsp#complete
-        autocmd FileType objcpp setlocal omnifunc=lsp#complete
-    augroup END
-endif
+"if executable('clangd')
+"    augroup lsp_clangd
+"        autocmd!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'clangd',
+"                    \ 'cmd': {server_info->['clangd']},
+"                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"                    \ 'blacklist': ['opc'],
+"                    \ })
+"        autocmd FileType c setlocal omnifunc=lsp#complete
+"        autocmd FileType cpp setlocal omnifunc=lsp#complete
+"        autocmd FileType objc setlocal omnifunc=lsp#complete
+"        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+"    augroup END
+"endif
 
 
 " jdt-language-server
-if executable('java') && filereadable(expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'))
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'eclipse.jdt.ls',
-        \ 'cmd': {server_info->[
-        \     'java',
-        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-        \     '-Dosgi.bundles.defaultStartLevel=4',
-        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
-        \     '-Dlog.level=ALL',
-        \     '-noverify',
-        \     '-Dfile.encoding=UTF-8',
-        \     '-Xmx1G',
-        \     '-jar',
-        \     expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'),
-        \     '-configuration',
-        \     expand('~/lsp/eclipse.jdt.ls/config_win'),
-        \     '-data',
-        \     getcwd()
-        \ ]},
-        \ 'whitelist': ['java'],
-        \ })
-    autocmd FileType java setlocal omnifunc=lsp#complete
-endif
+"if executable('java') && filereadable(expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'))
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'eclipse.jdt.ls',
+"        \ 'cmd': {server_info->[
+"        \     'java',
+"        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+"        \     '-Dosgi.bundles.defaultStartLevel=4',
+"        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
+"        \     '-Dlog.level=ALL',
+"        \     '-noverify',
+"        \     '-Dfile.encoding=UTF-8',
+"        \     '-Xmx1G',
+"        \     '-jar',
+"        \     expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'),
+"        \     '-configuration',
+"        \     expand('~/lsp/eclipse.jdt.ls/config_win'),
+"        \     '-data',
+"        \     getcwd()
+"        \ ]},
+"        \ 'whitelist': ['java'],
+"        \ })
+"    autocmd FileType java setlocal omnifunc=lsp#complete
+"endif
 
 
-let g:lsp_use_event_queue = 0
-let g:lsp_highlights_enabled = 0
-let g:lsp_highlight_references_enabled = 0
-let g:lsp_diagnostics_echo_cursor=1
-
-nmap ,i :LspHover<cr>
-nmap <C-]> :LspDefinition<cr>
-nmap <C-w><C-]> :sp<cr>:LspDefinition<cr>
 
 autocmd FileType ahk setl filetype=autohotkey
+
+
+" markdown-preview
+let g:mkdp_auto_close=0
