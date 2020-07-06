@@ -77,6 +77,17 @@ let g:loaded_netrwPlugin = 1
 "let g:netrw_sort_sequence='[\/]$'
 "let g:netrw_dirhistmax=0
 
+function! DefaultHighlightings()
+  highlight MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+  highlight MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+  highlight MarkWord3  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
+  highlight MarkWord4  ctermbg=Blue     ctermfg=Black  guibg=#6CABDA    guifg=Black
+  highlight MarkWord5  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
+  highlight MarkWord6  ctermbg=Cyan     ctermfg=Black  guibg=#AACCEE    guifg=Black
+endfunction
+call DefaultHighlightings()
+autocmd ColorScheme * call DefaultHighlightings()
+
 colorscheme molokai
 
 function! MkdirInit()
