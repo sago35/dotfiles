@@ -9,9 +9,14 @@ if (0 == scalar @ARGV) {
     exit 1;
 }
 
+if ($^O eq "MSWin32") {
+    $ENV{HOME} = $ENV{USERPROFILE};
+}
+
 my $ln_settings = {
     'tmux/conf'  => "$ENV{HOME}/.tmux.conf",
-    'vim/vimrc'  => "$ENV{HOME}/.vimrc",
+    'vim/init/_vimrc'  => "$ENV{HOME}/.vimrc",
+    'vim/init/_gvimrc'  => "$ENV{HOME}/.gvimrc",
     'git/config' => "$ENV{HOME}/.gitconfig",
     'tig/tigrc'  => "$ENV{HOME}/.tigrc",
 };
@@ -50,6 +55,11 @@ sub ln {
     $src = File::Spec->rel2abs($src);
     $dst = File::Spec->rel2abs($dst);
 
-    printf "%s\n", join ' ', 'ln', '-s', $src, $dst;
-    symlink $src, $dst;
+    if ($^O eq "MSWin32") {
+        printf "%s\n", join ' ', 'mklink', $dst, $src;
+        `mklink "$dst" "$src"`;
+    } else {
+        printf "%s\n", join ' ', 'ln', '-s', $src, $dst;
+        symlink $src, $dst;
+    }
 }
