@@ -36,7 +36,8 @@ set directory=~/.vim/swap
 set backupdir=~/.vim/backup
 set undodir=~/.vim/undo
 
-set ambiwidth=double
+"set ambiwidth=double
+set ambiwidth=single
 
 nmap <ESC><ESC> :nohlsearch<cr>
 
@@ -336,5 +337,14 @@ let &t_EI .= "\e[2 q"
 " 置換モード時に非点滅の下線タイプのカーソル
 let &t_SR .= "\e[4 q"
 
-hi CursorLine term=reverse cterm=none ctermbg=235
-set cursorline
+"hi CursorLine term=reverse cterm=none ctermbg=235
+"set cursorline
+
+if $COLORTERM == 'truecolor'
+  set t_Co=256
+  set termguicolors
+endif
+
+hi MatchParen term=none cterm=bold ctermfg=208 gui=bold guifg=#FD971F guibg=#000000
+
+let termdebugger="gdb-multiarch"
