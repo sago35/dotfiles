@@ -1,0 +1,34 @@
+export GOPATH=~/dev
+export PATH=$PATH:~/tinygo/tinygo/bin
+export PATH=$PATH:~/dev/bin
+export PATH=$PATH:/usr/local/go/bin
+
+alias gcd='cd ~/dev/src/`ghq list | peco`'
+alias clip='xsel --clipboard --input'
+alias rapture='wine ~/.wine/drive_c/Program\ Files/Rapture/rapture.exe'
+alias cd..='cd ..'
+
+#eval "$(tinygo --completion-script-bash)"
+
+#export PS1='\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+export PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$ '
+#export PS1='$ '
+
+#export TINYGOPATH='/home/sago35/tinygo/tinygo/'
+#export TINYGO_EDIT_WITH_GOROOT='1'
+#export TINYGO_EDIT_WITH_TINYGO_TARGETS='1'
+eval "$(tinygo-edit --completion-script-bash)"
+eval "$(tinygo-autocmpl --completion-script-bash)"
+
+export PERL_CPANM_OPT="--local-lib=~/perl5"
+export PATH=$HOME/perl5/bin:$PATH;
+export PERL5LIB=$HOME/perl5/lib/perl5:$PERL5LIB;
+
+export PATH=$HOME/.local/bin:$PATH;
+export PATH=$PATH:$HOME/esp/xtensa-esp32-elf/bin
+export PATH=$PATH:$HOME/Logic
+
+alias tig='tig --all'
+alias rm='rm -i'
+alias mv='mv -i'
