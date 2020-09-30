@@ -25,3 +25,11 @@
 "let g:go_auto_sameids = 0
 "
 "let g:go_jump_to_error = 0
+
+function! s:warnClrfGoFile()
+    if &ff != 'unix'
+        call confirm("Please fix the line endings to LF", "OK")
+    endif
+endfunction
+autocmd FileType go execute s:warnClrfGoFile()
+
