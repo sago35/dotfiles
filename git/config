@@ -5,6 +5,7 @@
 	encoding = utf-8
 [core]
 	editor = vim
+	autocrlf = false
 [alias]
 	co = checkout
 [ghq]
