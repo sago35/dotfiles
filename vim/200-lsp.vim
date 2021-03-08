@@ -11,9 +11,9 @@ function! s:on_lsp_buffer_enabled() abort
 
   nmap <buffer> ,i :LspHover<cr>
   nmap <buffer> <C-]> :LspDefinition<cr>
-  nmap <buffer> <C-w><C-]> :sp<cr>:LspDefinition<cr>
+  nmap <buffer> <C-w><C-]> :aboveleft LspDefinition<cr>
   nmap <buffer> <C-Space>s :LspReferences<CR>:cclose<CR>
-  nmap <buffer> <C-Space><C-Space>s :split<cr>:LspReferences<CR>:cclose<CR>
+  nmap <buffer> <C-Space><C-Space>s :aboveleft LspReferences<CR>:cclose<CR>
   nmap <buffer> ,i :LspHover<CR>
   nmap <buffer> ,f :LspDocumentFormat<cr>
 endfunction

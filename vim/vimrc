@@ -107,6 +107,7 @@ endfunction
 let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = '0'
 let g:ctrlp_user_command = 'git ls-files'
+let g:ctrlp_switch_buffer = ''
 
 " gitk???J??
 function! OpenGitk ()
