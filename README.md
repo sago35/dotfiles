@@ -20,14 +20,16 @@ go get -u -v github.com/vim-volt/volt
 volt get tpope/vim-fugitive
 volt get itchyny/lightline.vim
 volt get hotchpotch/perldoc-vim
-volt get fatih/vim-go
 volt get ctrlpvim/ctrlp.vim
 volt get sago35/mark.vim
 volt get sago35/molokai
 volt get sago35/yankrev.vim
 volt get cocopon/vaffle.vim
 volt get vim-jp/vimdoc-ja
+volt get sago35/tinygo.vim
 ```
+
+go get -v github.com/sago35/tinygo-autocmpl
 
 環境変数 PATH に以下を追加する。
 
