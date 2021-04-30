@@ -65,6 +65,7 @@ imap <C-]> <C-R>+
 vmap / y/<C-R>"<CR>
 
 "set rtp^=.
+set rtp^=~/dev/src/github.com/sago35/tinygo.vim
 "source $VIMLOCAL/dein.vimrc
 source $VIMLOCAL/perl.vimrc
 source $VIMLOCAL/lightline.vimrc
@@ -108,6 +109,7 @@ let g:ctrlp_regexp = 1
 let g:ctrlp_working_path_mode = '0'
 let g:ctrlp_user_command = 'git ls-files'
 let g:ctrlp_switch_buffer = ''
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " gitk???J??
 function! OpenGitk ()
