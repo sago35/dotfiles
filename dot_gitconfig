@@ -1,0 +1,16 @@
+# vim: set ft=gitconfig :
+[include]
+	path = ~/.local/share/dotfiles/git/config
+[core]
+	quotepath = false
+	pager = LESSCHARSET=utf-8 less
+	excludesFile = ~/.gitignore_global
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[url "ssh://git@git.alphatc.co.jp:29418/"]
+	insteadOf = https://git.alphatc.co.jp/git/
+[credential "http://atcserver"]
+	provider = generic

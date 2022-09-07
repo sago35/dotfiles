@@ -1,0 +1,5 @@
+source $VIMLOCAL/gvimrc
+
+if has('kaoriya')
+  SM 1
+endif

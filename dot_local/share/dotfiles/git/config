@@ -1,0 +1,11 @@
+[gui]
+	encoding = utf-8
+[core]
+	editor = vim
+[alias]
+	co = checkout
+[ghq]
+	root = ~/dev/src
+[url "git@github.com:"]
+	pushInsteadOf = git://github.com/
+	pushInsteadOf = https://github.com/

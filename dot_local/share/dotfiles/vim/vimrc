@@ -1,0 +1,356 @@
+scriptencoding utf-8
+
+set fileencodings=utf-8,cp932
+set encoding=utf-8
+syntax enable
+filetype plugin indent on 
+set guioptions=M
+set backspace=indent,eol,start
+set incsearch
+
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set nowrap
+set number
+set scrolloff=0
+set errorformat+=%f
+set efm^=%f:%l\\\,%c:%m
+
+set fileformats=unix,dos
+set updatetime=300
+
+"set statusline=[%{&fenc!=''?&fenc:&enc}][%{&ff}]%F%m%r%h%w[%Y]%=[%l,%v][%3p%%]
+set laststatus=2
+
+set list
+set listchars=trail:\ ,tab:>-,extends:<
+
+set ignorecase
+set hlsearch
+
+set diffopt=internal,filler,vertical,context:100000,algorithm:patience
+
+set directory=~/.vim/swap
+set backupdir=~/.vim/backup
+set undodir=~/.vim/undo
+
+set ambiwidth=double
+"set ambiwidth=single
+
+nmap <ESC><ESC> :nohlsearch<cr>
+
+nmap <DOWN>  :cnext<cr>zz
+nmap <UP>    :cprev<cr>zz
+nmap <LEFT>  :colder<cr>
+nmap <RIGHT> :cnewer<cr>
+
+nmap <A-LEFT>  :diffget<cr>
+nmap <A-RIGHT> :diffput<cr>
+nmap <A-DOWN>  ]czz
+nmap <A-UP>    [czz
+
+nmap <C-W><C-O> :tabe %<cr>
+
+" Mark
+nmap <unique> <silent> g/ <Plug>MarkSet
+vmap <unique> <silent> g/ <Plug>MarkSet
+nmap <unique> <silent> g. <Plug>MarkClear
+nmap <unique> <silent> gr <Plug>MarkRegex
+nmap <unique> <silent> g? :<C-u>call mark#ClearAll()<CR>
+
+imap <C-]> <C-R>+
+
+vmap / y/<C-R>"<CR>
+
+"set rtp^=.
+"source $VIMLOCAL/dein.vimrc
+source $VIMLOCAL/perl.vimrc
+source $VIMLOCAL/lightline.vimrc
+source $VIMLOCAL/cscope.vimrc
+source $VIMLOCAL/200-lsp.vim
+source $VIMLOCAL/go.vimrc
+
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+"let g:netrw_banner = 0
+"let g:netrw_sort_sequence='[\/]$'
+"let g:netrw_dirhistmax=0
+
+function! DefaultHighlightings()
+  highlight MarkWord1  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+  highlight MarkWord2  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+  highlight MarkWord3  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
+  highlight MarkWord4  ctermbg=Blue     ctermfg=Black  guibg=#6CABDA    guifg=Black
+  highlight MarkWord5  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
+  highlight MarkWord6  ctermbg=Cyan     ctermfg=Black  guibg=#AACCEE    guifg=Black
+endfunction
+call DefaultHighlightings()
+autocmd ColorScheme * call DefaultHighlightings()
+
+colorscheme molokai
+
+function! MkdirInit()
+    if !isdirectory(&directory)
+        call mkdir(&directory)
+    endif
+    if !isdirectory(&backupdir)
+        call mkdir(&backupdir)
+    endif
+    if !isdirectory(&undodir)
+        call mkdir(&undodir)
+    endif
+endfunction
+
+" ctrlp
+let g:ctrlp_regexp = 1
+let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_user_command = 'git ls-files'
+
+" gitk???J??
+function! OpenGitk ()
+    silent! !perl -e "exec qw(gitk)"
+endfunction
+
+function! OpenGitkAll ()
+    silent! !perl -e "exec qw(gitk --all)"
+endfunction
+
+command! Gitk call OpenGitkAll()
+
+set grepprg=git\ grep\ -n\ -P
+
+
+
+" mkpped
+"set diffexpr=MyDiff()
+function! MyDiff()
+    silent execute "!git_diff_normal_format.pl " v:fname_in . " " . v:fname_new .  " > " . v:fname_out
+endfunction
+
+function! PreproDiff()
+    hi DiffAdd term=bold ctermbg=9 guibg=#333333 guifg=#555555
+    silent execute "!copy " . expand("%:p") . ".ed" . " " . 'c:\takasago\dev\src\atcserver.com\others\MkPped\out.txt'
+    silent execute "diffsplit " . expand("%") . ".pped"
+endfunction
+
+set isfname-==
+
+
+function! Bash ()
+    silent! terminal ++close "c:\Program Files\Git\bin\bash.exe"
+endfunction
+command! Bash call Bash()
+
+function! PowerShell ()
+    silent! terminal ++close "powershell"
+endfunction
+command! PowerShell call PowerShell()
+
+set termwinscroll=100000
+"set termwinsize=25x0
+
+let g:neosnippet#disable_runtime_snippets = { '_' : 1 }
+
+" mattn/gbhtml
+function! s:clipboard_html(...) abort
+  let l:org_number = &number
+  let enc = &fileencoding
+
+  if enc == 'cp932'
+      set fenc=utf8
+  endif
+
+  setlocal nonumber
+  '<,'>TOhtml
+  %!cbhtml
+  bw!
+  let &number = l:org_number
+
+  if enc == 'cp932'
+      set fenc=cp932
+  endif
+endfunction
+
+xnoremap <silent> <plug>(clipboard-html) :<c-u>call <sid>clipboard_html()<cr>
+xmap <leader>C <plug>(clipboard-html)
+
+au BufNewFile,BufRead *.asc setf canoelog
+au BufNewFile,BufRead *.mhx setf srec
+
+" rust
+
+let g:rustfmt_autosave = 1
+
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_mode_map = {
+    \ "mode": "active",
+    \ "active_filetypes": ["ruby", "php"],
+    \ "passive_filetypes": ["c", "perl"] }
+
+" tagbar
+let g:tagbar_left = 1
+let g:tagbar_autofocus = 1
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" vim-lsp
+"if executable('gopls')
+"    augroup LspGo
+"        au!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'go-lang',
+"        \ 'cmd': {server_info->['golsp', '-mode', 'stdio']},
+"                    \ 'whitelist': ['go'],
+"                    \ })
+"        autocmd FileType go setlocal omnifunc=lsp#complete
+"    augroup END
+"
+"   "au FileType go nnoremap <buffer> <silent> gd :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-]> :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-w>] :split \| :LspDefinition<cr>
+"   "au FileType go nnoremap <buffer> <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"
+"   "nmap <silent> <Leader>d :LspDefinition<CR>
+"   "nmap <silent> <Leader>p :LspHover<CR>
+"   "nmap <silent> <Leader>r :LspReferences<CR>
+"   "nmap <silent> <Leader>i :LspImplementation<CR>
+"   "nmap <silent> <Leader>s :split \| :LspDefinition <CR>
+"   "nmap <silent> <Leader>v :vsplit \| :LspDefinition <CR>
+"
+"   "nnoremap <silent> gd :LspDefinition<cr>
+"   "nnoremap <silent> <C-]> :LspDefinition<cr>
+"   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "nnoremap <silent> g<LeftMouse> <LeftMouse>:LspDefinition<cr>
+"   "nnoremap <silent> <C-w><C-]> :split \| :LspDefinition<cr>
+"   "nnoremap <silent> <C-w>] :split \| :LspDefinition<cr>
+"   "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"
+"   "nnoremap <silent> gd :GoDef<cr>
+"   "nnoremap <silent> <C-]> :GoDef<cr>
+"   "nnoremap <silent> <C-LeftMouse> <LeftMouse>:GoDef<cr>
+"   "nnoremap <silent> g<LeftMouse> <LeftMouse>:GoDef<cr>
+"   "nnoremap <silent> <C-w><C-]> :<C-u>call go#def#Jump("split")<CR>
+"   "nnoremap <silent> <C-w>] :<C-u>call go#def#Jump("split")<CR>
+"    "nnoremap <silent> <C-t> :<C-U>call go#def#StackPop(v:count1)<cr>
+"endif
+
+"let g:lsp_async_completion = 0
+
+
+" clangd
+let $PATH = 'C:\LLVM\bin;' . $PATH
+"let g:lsp_log_verbose = 1
+"call ch_logfile("vim-ch.log", "w")
+
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+"if executable('clangd')
+"    augroup lsp_clangd
+"        autocmd!
+"        autocmd User lsp_setup call lsp#register_server({
+"                    \ 'name': 'clangd',
+"                    \ 'cmd': {server_info->['clangd']},
+"                    \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+"                    \ 'blacklist': ['opc'],
+"                    \ })
+"        autocmd FileType c setlocal omnifunc=lsp#complete
+"        autocmd FileType cpp setlocal omnifunc=lsp#complete
+"        autocmd FileType objc setlocal omnifunc=lsp#complete
+"        autocmd FileType objcpp setlocal omnifunc=lsp#complete
+"    augroup END
+"endif
+
+
+" jdt-language-server
+"if executable('java') && filereadable(expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'))
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'eclipse.jdt.ls',
+"        \ 'cmd': {server_info->[
+"        \     'java',
+"        \     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+"        \     '-Dosgi.bundles.defaultStartLevel=4',
+"        \     '-Declipse.product=org.eclipse.jdt.ls.core.product',
+"        \     '-Dlog.level=ALL',
+"        \     '-noverify',
+"        \     '-Dfile.encoding=UTF-8',
+"        \     '-Xmx1G',
+"        \     '-jar',
+"        \     expand('~\lsp\eclipse.jdt.ls\plugins\org.eclipse.equinox.launcher_1.5.400.v20190515-0925.jar'),
+"        \     '-configuration',
+"        \     expand('~/lsp/eclipse.jdt.ls/config_win'),
+"        \     '-data',
+"        \     getcwd()
+"        \ ]},
+"        \ 'whitelist': ['java'],
+"        \ })
+"    autocmd FileType java setlocal omnifunc=lsp#complete
+"endif
+
+
+
+autocmd FileType ahk setl filetype=autohotkey
+
+
+" markdown-preview
+let g:mkdp_auto_close=0
+
+set vb
+
+" https://qiita.com/Linda_pp/items/9e0c94eb82b18071db34
+" 挿入モード時に非点滅の縦棒タイプのカーソル
+let &t_SI .= "\e[6 q"
+" ノーマルモード時に非点滅のブロックタイプのカーソル
+let &t_EI .= "\e[2 q"
+" 置換モード時に非点滅の下線タイプのカーソル
+let &t_SR .= "\e[4 q"
+
+"hi CursorLine term=reverse cterm=none ctermbg=235
+"set cursorline
+
+if $COLORTERM == 'truecolor'
+  set t_Co=256
+  set termguicolors
+endif
+
+hi MatchParen term=none cterm=bold ctermfg=208 gui=bold guifg=#FD971F guibg=#000000
+
+let termdebugger="gdb-multiarch"
+let $LANG="ja_JP.UTF-8"
+
+"hi! link EndOfBuffer TabLineFill
+set shellslash
+
+tnoremap <silent> <s-space> <space>
