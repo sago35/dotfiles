@@ -5,6 +5,7 @@
 	quotepath = false
 	pager = LESSCHARSET=utf-8 less
 	excludesFile = ~/.gitignore_global
+	autocrlf = false
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
