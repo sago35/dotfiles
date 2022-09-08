@@ -51,7 +51,7 @@ vkBA::Run, ..\fenrir\fenrir.exe, ..\fenrir\
 *vk1C::Send, !{vkF3}
 
 PrintScreen::
-    Run, ..\rapture\rapture.exe, ..\rapture
+    Run, %USERPROFILE%\app\rapture\rapture.exe, %USERPROFILE%\app\rapture
     return
 
 #0::
