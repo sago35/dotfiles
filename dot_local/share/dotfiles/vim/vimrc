@@ -138,8 +138,13 @@ endfunction
 set isfname-==
 
 
+let g:bashexe = "c:\Program Files\Git\bin\bash.exe"
 function! Bash ()
-    silent! terminal ++close "c:\Program Files\Git\bin\bash.exe"
+    if filereadable(g:bashexe)
+        silent! terminal ++close "c:\Program Files\Git\bin\bash.exe"
+    else
+        silent! terminal ++close
+    endif
 endfunction
 command! Bash call Bash()
 
