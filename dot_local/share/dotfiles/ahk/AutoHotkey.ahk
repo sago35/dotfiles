@@ -2,12 +2,21 @@
 
 #include local\rc
 #include AutoHotkey.ahk
-;#include ..\..
-;#include teams-mute\teams-mute.ahk
 
-F1::
-    Send, ^v{Down}
+#IfWinActive Adobe Acrobat Reader DC
+^c::
+    Send, ^c
+    ClipWait
+    x = %clipboard%
+    space := " "
+    StringReplace, x, x, .`r`n, .`r, All
+    StringReplace, x, x, :`r`n, :`r, All
+    StringReplace, x, x, `r`n, %space%, All
+    StringReplace, x, x, .`r, .`r`n`r`n, All
+    StringReplace, x, x, :`r, :`r`n`r`n, All
+    clipboard = %x%
     return
+#IfWinActive
 
 ExitSub:
     ; AHK終了時に実行したい処理があればここに書く
@@ -59,6 +68,16 @@ F19::
     WinSet, Transparent, %tp%, A
     return
 ; ------------------------------------------------------------------------------
+
+ExitSub:
+    ; AHK終了時に実行したい処理があればここに書く
+    ExitApp
+
+#IfWinNotActive ChildView ; RemoteView
+^m::
+    Send, {Enter}
+    return
+#IfWinNotActive
 
 F10::
     mofs := 0
@@ -146,10 +165,10 @@ F11::
 ;    return
 
 
-+F4::
-    Send, ^v
-    Send, {DOWN}
-    return
+;+F4::
+;    Send, ^v
+;    Send, {DOWN}
+;    return
 
 ;#IfWinActive ahk_class CabinetWClass
 ;; F4 を押す毎に以下の URL を切り替える
