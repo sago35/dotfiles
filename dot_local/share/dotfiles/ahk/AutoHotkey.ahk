@@ -18,10 +18,6 @@
     return
 #IfWinActive
 
-ExitSub:
-    ; AHK終了時に実行したい処理があればここに書く
-    ExitApp
-
 ; ------------------------------------------------------------------------------
 ; with QMK
 #IfWinNotActive ChildView ; RemoteView
