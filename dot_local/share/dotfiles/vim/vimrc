@@ -110,11 +110,11 @@ let g:ctrlp_user_command = 'git ls-files'
 
 " gitk???J??
 function! OpenGitk ()
-    silent! !perl -e "exec qw(gitk)"
+    silent! execute "!gitk"
 endfunction
 
 function! OpenGitkAll ()
-    silent! !perl -e "exec qw(gitk --all)"
+    silent! execute "!gitk --all"
 endfunction
 
 command! Gitk call OpenGitkAll()
