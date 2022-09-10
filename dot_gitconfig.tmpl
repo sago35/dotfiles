@@ -1,4 +1,11 @@
 # vim: set ft=gitconfig :
+{{- if (eq .chezmoi.os "linux") }}
+{{- if (eq .chezmoi.username "sago35") }}
+[user]
+	name = sago35
+	email = sago35@gmail.com
+{{- end }}
+{{- end }}
 [include]
 	path = ~/.local/share/dotfiles/git/config
 [core]
