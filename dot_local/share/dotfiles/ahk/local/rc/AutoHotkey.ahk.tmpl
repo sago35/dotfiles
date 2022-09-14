@@ -17,8 +17,14 @@ return
 
 ; ------------------------------------------------------------------------------
 ; tsense mode
+
+{{- if (eq .chezmoi.hostname "AT0316") }}
+vk1D::ToggleTsenseMode(0)
+vk1D Up::ToggleTsenseMode(1)
+{{- else }}
 vk1D::ToggleTsenseMode(1)
 vk1D Up::ToggleTsenseMode(0)
+{{- end }}
 
 #IfWinExist, __tsense_mode_win
 F1::
