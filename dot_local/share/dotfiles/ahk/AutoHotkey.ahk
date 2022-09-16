@@ -166,47 +166,34 @@ F11::
 ;    Send, {DOWN}
 ;    return
 
-;#IfWinActive ahk_class CabinetWClass
-;; F4 を押す毎に以下の URL を切り替える
-;; ローカル側を開くときは、 others/tb_unc_open 経由で開く事により svn update 等を実施する
-;;   file:///C:/alphatc_svn_work/
-;;   file://atcserver/svn/alphatc/files/work/
-;; ahk_class CabinetWClass == explorer.exe
-;F4::
-;    WinGet, wid, ID, A
-;
-;    windows := ComObjCreate("Shell.Application").Windows()
-;    for win in windows {
-;        if win.hwnd == wid {
-;            name := win.LocationName
-;            url  := win.LocationURL
-;            hwnd := win.hwnd
-;
-;            path := ""
-;            if SubStr(url, 1, 8) == "file:///" {
-;                path := SubStr(url, 9)
-;            }
-;            clip_org := clipboardAll
-;            Run, copy_fullpath.exe %path%
-;            path := clipboard
-;            MsgBox, %path%
-;            ;:w
-;            ;clipboard := clip_org
-;
-;            if SubStr(path, 1, 20) == "C:\alphatc_svn_work\" {
-;                target := "file://atcserver/svn/alphatc/files/work/" + SubStr(url, 1 + 28)
-;                win.Navigate(target)
-;
-;            } else if SubStr(path, 1, 35) == "\\atcserver\svn\alphatc\files\work\" {
-;                ;target := "file:///C:/alphatc_svn_work/" + SubStr(url, 1 + 40)
-;                ;win.Navigate(target)
-;                MsgBox, tb_unc_open --hwnd %wid% %path%
-;                Run, tb_unc_open --hwnd %wid% file:///%path%
-;            }
-;        }
-;    }
-;    return
-;#IfWinActive
+#IfWinActive ahk_class CabinetWClass
+; F4 を押す毎に以下の URL を切り替える
+; ローカル側を開くときは、 others/tb_unc_open 経由で開く事により svn update 等を実施する
+;   file:///C:/alphatc_svn_work/
+;   file://atcserver/svn/alphatc/files/work/
+; ahk_class CabinetWClass == explorer.exe
+F4::
+    WinGet, wid, ID, A
+    windows := ComObjCreate("Shell.Application").Windows()
+    for win in windows {
+        if win.hwnd == wid {
+            name := win.LocationName
+            url  := win.LocationURL
+            hwnd := win.hwnd
+            if SubStr(url, 1, 37) == "file:///E:/takasago/alphatc_svn_work/" {
+                target := "file://atcserver/svn/alphatc/files/work/" + SubStr(url, 1 + 37)
+                win.Navigate(target)
+            } else if SubStr(url, 1, 40) == "file://atcserver/svn/alphatc/files/work/" {
+                ;target := "file:///C:/alphatc_svn_work/" + SubStr(url, 1 + 40)
+                ;win.Navigate(target)
+                ;MsgBox, tb_unc_open --hwnd %wid% %url%
+                ;Run, cmd /c tb_unc_open --hwnd %wid% %url% && pause
+                Run, cmd /c tb_unc_open --hwnd %wid% %url%
+            }
+        }
+    }
+    return
+#IfWinActive
 
 
 ; vi:set et ft=ahk:
