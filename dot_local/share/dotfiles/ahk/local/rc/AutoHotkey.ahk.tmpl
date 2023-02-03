@@ -4,7 +4,11 @@ Menu, TRAY, Icon, AutoHotkey.exe, 2
 SetTimer, PeriodicProcess500ms, 500
 CoordMode, ToolTip, Screen
 
+{{- if (eq .chezmoi.hostname "AT0489") }}
+EDITOR = gvim.bat
+{{- else }}
 EDITOR = gvim
+{{- end }}
 
 #include tsense-ahk
 #include tsense.ahk
@@ -17,13 +21,16 @@ return
 
 ; ------------------------------------------------------------------------------
 ; tsense mode
-
+#IfWinNotActive ChildView ; RemoteView
 {{- if (eq .chezmoi.hostname "AT0316") }}
 vk1D::ToggleTsenseMode(0)
 vk1D Up::ToggleTsenseMode(1)
 {{- else }}
 vk1D::ToggleTsenseMode(1)
 vk1D Up::ToggleTsenseMode(0)
+
+F20::ToggleTsenseMode(1)
+F20 Up::ToggleTsenseMode(0)
 {{- end }}
 
 #IfWinExist, __tsense_mode_win
@@ -35,6 +42,7 @@ F1::
 vkBA::Run, ..\fenrir\fenrir.exe, ..\fenrir\
 #z::Reload
 #IfWinExist
+#IfWinNotActive
 
 ; ------------------------------------------------------------------------------
 ; AutoHotkeyの設定

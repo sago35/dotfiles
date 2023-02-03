@@ -332,7 +332,7 @@ autocmd FileType ahk setl filetype=autohotkey
 " markdown-preview
 let g:mkdp_auto_close=0
 
-set vb
+set novb
 
 " https://qiita.com/Linda_pp/items/9e0c94eb82b18071db34
 " 挿入モード時に非点滅の縦棒タイプのカーソル

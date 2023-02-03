@@ -36,6 +36,7 @@ e::Send, {END}
 v::Send, {LButton}{LButton}
 t::WinGetTitle, clipboard, A
 m::Send, {ENTER}
+BackSpace::Delete
 
 r::ToggleMaximize(0)
 +r::ToggleMaximize(1)
