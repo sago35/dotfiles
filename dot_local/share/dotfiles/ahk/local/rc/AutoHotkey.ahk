@@ -17,8 +17,14 @@ return
 
 ; ------------------------------------------------------------------------------
 ; tsense mode
+#IfWinNotActive ChildView
 vk1D::ToggleTsenseMode(1)
 vk1D Up::ToggleTsenseMode(0)
+#IfWinNotActive
+
+F20::ToggleTsenseMode(1)
+F20 Up::ToggleTsenseMode(0)
+
 
 #IfWinExist, __tsense_mode_win
 F1::
@@ -48,20 +54,20 @@ vkBA::Run, ..\fenrir\fenrir.exe, ..\fenrir\
     return
 
 ; 変換キーを半角/全角に
-*vk1C::Send, !{vkF3}
+;*vk1C::Send, !{vkF3}
 
 PrintScreen::
     Run, %USERPROFILE%\app\rapture\rapture.exe, %USERPROFILE%\app\rapture
     return
 
-#0::
-    ; A_WorkingDirのHEADを書き出して、出力先フォルダを開く
-    if (FileExist("dist") == "") {
-        FileCreateDir, dist
-    }
-    Run, git archive --format=zip -o dist/%A_YYYY%%A_MM%%A_DD%_ahk_config.zip HEAD
-    Run, explorer dist
-    return
+;#0::
+;    ; A_WorkingDirのHEADを書き出して、出力先フォルダを開く
+;    if (FileExist("dist") == "") {
+;        FileCreateDir, dist
+;    }
+;    Run, git archive --format=zip -o dist/%A_YYYY%%A_MM%%A_DD%_ahk_config.zip HEAD
+;    Run, explorer dist
+;    return
 
 ; calendar
 #1::
@@ -75,11 +81,11 @@ PrintScreen::
     return
 
 ; Excel like
-#IfWinNotActive ChildView
+;#IfWinNotActive ChildView
 ^;::
     Send, %A_YYYY%/%A_MM%/%A_DD%
     return
-#IfWinNotActive
+;#IfWinNotActive
 
 ; ------------------------------------------------------------------------------
 ; cltc

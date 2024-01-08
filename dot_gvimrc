@@ -1,5 +1,8 @@
 source $VIMLOCAL/gvimrc
 
+tmap <2-LeftMouse> <C-W>:
+tmap <MiddleMouse> <C-W>"+
+
 if has('kaoriya')
   SM 1
 endif

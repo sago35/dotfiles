@@ -66,6 +66,7 @@ Left::Home
 Right::End
 Up::PgUp
 Down::PgDn
+BackSpace::Delete
 
 WheelDown::
     WinGet, tp, Transparent, A

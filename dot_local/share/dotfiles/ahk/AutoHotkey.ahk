@@ -1,9 +1,64 @@
 ﻿OnExit, ExitSub
 
+#MaxHotkeysPerInterval 120
+
 #include local\rc
 #include AutoHotkey.ahk
 
-#IfWinActive Adobe Acrobat Reader DC
+
+; vk1C == 変換キー
+vk1C & q::1
+vk1C & w::2
+vk1C & e::3
+vk1C & r::4
+vk1C & t::5
+vk1C & a::6
+vk1C & s::7
+vk1C & d::8
+vk1C & f::9
+vk1C & g::0
+
+vk1C & y::-
+vk1C & u::^
+vk1C & i::\
+vk1C & o::[
+vk1C & p::]
+vk1C & @::BackSpace
+
+vk1C & h::Left
+vk1C & j::Down
+vk1C & k::Up
+vk1C & l::Right
+vk1C & sc027::ESC   ; sc027 == semicolon
+vk1C & sc028::Enter ; sc028 == colon
+
+vk1C & Shift::F1
+vk1C & z::F2
+vk1C & x::F3
+vk1C & c::F4
+vk1C & v::F5
+vk1C & b::F6
+vk1C & n::F7
+vk1C & m::F8
+vk1C & ,::F9
+vk1C & .::F10
+
+
+;DEL::
+;    Send, {LButton}{LButton}
+;    Sleep, 800
+;    Send, {TAB}
+;    Sleep, 200
+;    Send, {TAB}
+;    Sleep, 500
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Sleep, 500
+;    Send, ^{ENTER}
+
+#IfWinActive Adobe Acrobat Reader (64-bit)
 ^c::
     Send, ^c
     ClipWait
@@ -21,15 +76,15 @@
 ; ------------------------------------------------------------------------------
 ; with QMK
 #IfWinNotActive ChildView ; RemoteView
-F13::StartEasyWindowDrag()
+F13::StartEasyWindowDrag() ; z
 F13 Up::EndEasyWindowDrag()
-F14::StartEasyWindowResize()
+F14::StartEasyWindowResize() ; x
 F14 Up::EndEasyWindowResize()
-F15::WinClose, A
-F16::Send, {LButton}{LButton}
-F18::WinGetTitle, clipboard, A
+F15::WinClose, A ; w
+F16::Send, {LButton}{LButton} ; v
+F18::WinGetTitle, clipboard, A ; t
 
-F17::ToggleMaximize(0)
+F17::ToggleMaximize(0) ; r
 +F17::ToggleMaximize(1)
 ^F17::ToggleMaximize(2)
 
@@ -75,22 +130,22 @@ ExitSub:
     return
 #IfWinNotActive
 
-F10::
-    mofs := 0
-    Loop {
-        if (1000 < A_TimeIdlePhysical) {
-            MouseGetPos, mx, my
-            Sleep, 10
-            x := -1280 - mofs
-            mofs := 1 - mofs
-            MouseMove, %x%, 1200, 0
-            Sleep, 10
-            MouseMove, %mx%, %my%, 0
-            Sleep, 60000
-        }
-        Sleep, 1000
-    }
-    return
+;F10::
+;    mofs := 0
+;    Loop {
+;        if (1000 < A_TimeIdlePhysical) {
+;            MouseGetPos, mx, my
+;            Sleep, 10
+;            x := -1280 - mofs
+;            mofs := 1 - mofs
+;            MouseMove, %x%, 1200, 0
+;            Sleep, 10
+;            MouseMove, %mx%, %my%, 0
+;            Sleep, 60000
+;        }
+;        Sleep, 1000
+;    }
+;    return
 
 ;F12::
 ;    if (teams_id = "") {
@@ -100,26 +155,26 @@ F10::
 ;    WinActivate, ahk_id %teams_id%
 ;    return
 
-F11::
-+F12::
-    WinGet, active_id, ID, A
-
-    ;WinGet, teams_id, ID, ahk_exe Teams.exe
-    ;MsgBox, %teams_id%
-
-    if (teams_id = "") {
-        MsgBox, teams_id not found
-        return
-    }
-
-    WinActivate, ahk_id %teams_id%
-    WinWaitActive, ahk_id %teams_id%
-
-    Send, ^+m
-
-    WinActivate, ahk_id %active_id%
-
-    return
+;F11::
+;+F12::
+;    WinGet, active_id, ID, A
+;
+;    ;WinGet, teams_id, ID, ahk_exe Teams.exe
+;    ;MsgBox, %teams_id%
+;
+;    if (teams_id = "") {
+;        MsgBox, teams_id not found
+;        return
+;    }
+;
+;    WinActivate, ahk_id %teams_id%
+;    WinWaitActive, ahk_id %teams_id%
+;
+;    Send, ^+m
+;
+;    WinActivate, ahk_id %active_id%
+;
+;    return
 
 
 
