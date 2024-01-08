@@ -2,6 +2,11 @@ set packpath=$HOME/.local/share/vim-plugins/
 let $VIMLOCAL = $HOME . "/.local/share/dotfiles/vim/"
 source $VIMLOCAL/vimrc
 
+" for talk
+" あとは、 terminal のテーマを talk に変えておくこと
+"colorscheme zellner
+"set nonu
+
 " gnome-terminal
 let g:terminal_ansi_colors = [
 \ '#2e3436',

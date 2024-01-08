@@ -17,6 +17,8 @@ elseif has('mac')
 elseif has('xfontset')
   " UNIX用 (xfontsetを使用)
   set guifontset=a14,r14,k14
+else
+    set guifont=Monospace\ 12
 endif
 
 "---------------------------------------------------------------------------
@@ -111,8 +113,13 @@ set renderoptions=type:directx
 
 
 function! g:Fontsize(mode, ...)
-    let l:f = substitute(&guifont, ':h\(\d\+\):', '\=printf(":h%d:", submatch(1) + a:mode)', "")
-    let &guifont = l:f
+    if has('win32')
+        let l:f = substitute(&guifont, ':h\(\d\+\):', '\=printf(":h%d:", submatch(1) + a:mode)', "")
+        let &guifont = l:f
+    else
+        let l:f = substitute(&guifont, ' \(\d\+\)\>', '\=printf(" %d", submatch(1) + a:mode)', "")
+        let &guifont = l:f
+    endif
 endfunction
 nmap + :call Fontsize(+1)<cr>
 nmap - :call Fontsize(-1)<cr>
