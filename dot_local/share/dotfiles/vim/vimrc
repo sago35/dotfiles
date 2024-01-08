@@ -363,3 +363,6 @@ tnoremap <silent> <s-space> <space>
 if has('linux')
     set clipboard=unnamedplus
 endif
+
+nmap <F7> [c
+nmap <F8> ]c
