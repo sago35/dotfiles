@@ -123,3 +123,6 @@ function! g:Fontsize(mode, ...)
 endfunction
 nmap + :call Fontsize(+1)<cr>
 nmap - :call Fontsize(-1)<cr>
+
+tmap <2-LeftMouse> <C-W>:
+tmap <MiddleMouse> <C-W>"+
