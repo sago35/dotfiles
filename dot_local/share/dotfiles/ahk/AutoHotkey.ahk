@@ -12,36 +12,38 @@ vk1C & w::2
 vk1C & e::3
 vk1C & r::4
 vk1C & t::5
-vk1C & a::6
-vk1C & s::7
-vk1C & d::8
-vk1C & f::9
-vk1C & g::0
+vk1C & y::6
+vk1C & u::7
+vk1C & i::8
+vk1C & o::9
+vk1C & p::0
 
-vk1C & y::-
-vk1C & u::^
-vk1C & i::\
-vk1C & o::[
-vk1C & p::]
+vk1C & a::-
+vk1C & s::^
+vk1C & d::\
+vk1C & f::[
+vk1C & g::]
 vk1C & @::BackSpace
 
-vk1C & h::Left
-vk1C & j::Down
-vk1C & k::Up
-vk1C & l::Right
-vk1C & sc027::ESC   ; sc027 == semicolon
-vk1C & sc028::Enter ; sc028 == colon
+vk1C & h::Home
+vk1C & j::PgDn
+vk1C & k::PgUp
+vk1C & l::End
+vk1C & sc027::Enter ; sc027 == semicolon
+vk1C & sc028::ESC   ; sc028 == colon
 
-vk1C & Shift::F1
-vk1C & z::F2
-vk1C & x::F3
-vk1C & c::F4
-vk1C & v::F5
-vk1C & b::F6
-vk1C & n::F7
-vk1C & m::F8
-vk1C & ,::F9
-vk1C & .::F10
+vk1C & z::F1
+vk1C & x::F2
+vk1C & c::F3
+vk1C & v::F4
+vk1C & b::F5
+vk1C & n::F6
+vk1C & m::F7
+vk1C & ,::F8
+vk1C & .::F9
+vk1C & /::F10
+vk1C & sc056::F11
+vk1C & Left::F12
 
 
 ;DEL::
