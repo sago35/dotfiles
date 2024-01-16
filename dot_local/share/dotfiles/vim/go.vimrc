@@ -41,4 +41,4 @@ endfunction
 
 
 autocmd FileType go execute s:warnCrlfGoFile()
-command! WarnCrlfGoFile call s:disableWarnCrlfGoFile()
+command! DisableWarnCrlfGoFile call s:disableWarnCrlfGoFile()

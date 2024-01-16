@@ -1,7 +1,64 @@
 ﻿OnExit, ExitSub
 
+#MaxHotkeysPerInterval 120
+
 #include local\rc
 #include AutoHotkey.ahk
+
+
+; vk1C == 変換キー
+vk1C & q::1
+vk1C & w::2
+vk1C & e::3
+vk1C & r::4
+vk1C & t::5
+vk1C & y::6
+vk1C & u::7
+vk1C & i::8
+vk1C & o::9
+vk1C & p::0
+
+vk1C & a::-
+vk1C & s::^
+vk1C & d::\
+vk1C & f::[
+vk1C & g::]
+vk1C & @::BackSpace
+
+vk1C & h::Home
+vk1C & j::PgDn
+vk1C & k::PgUp
+vk1C & l::End
+vk1C & sc027::Enter ; sc027 == semicolon
+vk1C & sc028::ESC   ; sc028 == colon
+
+vk1C & z::F1
+vk1C & x::F2
+vk1C & c::F3
+vk1C & v::F4
+vk1C & b::F5
+vk1C & n::F6
+vk1C & m::F7
+vk1C & ,::F8
+vk1C & .::F9
+vk1C & /::F10
+vk1C & sc056::F11
+vk1C & Left::F12
+
+
+;DEL::
+;    Send, {LButton}{LButton}
+;    Sleep, 800
+;    Send, {TAB}
+;    Sleep, 200
+;    Send, {TAB}
+;    Sleep, 500
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Send, {DOWN}
+;    Sleep, 500
+;    Send, ^{ENTER}
 
 #IfWinActive Adobe Acrobat Reader DC
 ^c::
@@ -21,15 +78,15 @@
 ; ------------------------------------------------------------------------------
 ; with QMK
 #IfWinNotActive ChildView ; RemoteView
-F13::StartEasyWindowDrag()
+F13::StartEasyWindowDrag() ; z
 F13 Up::EndEasyWindowDrag()
-F14::StartEasyWindowResize()
+F14::StartEasyWindowResize() ; x
 F14 Up::EndEasyWindowResize()
-F15::WinClose, A
-F16::Send, {LButton}{LButton}
-F18::WinGetTitle, clipboard, A
+F15::WinClose, A ; w
+F16::Send, {LButton}{LButton} ; v
+F18::WinGetTitle, clipboard, A ; t
 
-F17::ToggleMaximize(0)
+F17::ToggleMaximize(0) ; r
 +F17::ToggleMaximize(1)
 ^F17::ToggleMaximize(2)
 
@@ -75,22 +132,22 @@ ExitSub:
     return
 #IfWinNotActive
 
-F10::
-    mofs := 0
-    Loop {
-        if (1000 < A_TimeIdlePhysical) {
-            MouseGetPos, mx, my
-            Sleep, 10
-            x := -1280 - mofs
-            mofs := 1 - mofs
-            MouseMove, %x%, 1200, 0
-            Sleep, 10
-            MouseMove, %mx%, %my%, 0
-            Sleep, 60000
-        }
-        Sleep, 1000
-    }
-    return
+;F10::
+;    mofs := 0
+;    Loop {
+;        if (1000 < A_TimeIdlePhysical) {
+;            MouseGetPos, mx, my
+;            Sleep, 10
+;            x := -1280 - mofs
+;            mofs := 1 - mofs
+;            MouseMove, %x%, 1200, 0
+;            Sleep, 10
+;            MouseMove, %mx%, %my%, 0
+;            Sleep, 60000
+;        }
+;        Sleep, 1000
+;    }
+;    return
 
 ;F12::
 ;    if (teams_id = "") {
@@ -100,26 +157,26 @@ F10::
 ;    WinActivate, ahk_id %teams_id%
 ;    return
 
-F11::
-+F12::
-    WinGet, active_id, ID, A
-
-    ;WinGet, teams_id, ID, ahk_exe Teams.exe
-    ;MsgBox, %teams_id%
-
-    if (teams_id = "") {
-        MsgBox, teams_id not found
-        return
-    }
-
-    WinActivate, ahk_id %teams_id%
-    WinWaitActive, ahk_id %teams_id%
-
-    Send, ^+m
-
-    WinActivate, ahk_id %active_id%
-
-    return
+;F11::
+;+F12::
+;    WinGet, active_id, ID, A
+;
+;    ;WinGet, teams_id, ID, ahk_exe Teams.exe
+;    ;MsgBox, %teams_id%
+;
+;    if (teams_id = "") {
+;        MsgBox, teams_id not found
+;        return
+;    }
+;
+;    WinActivate, ahk_id %teams_id%
+;    WinWaitActive, ahk_id %teams_id%
+;
+;    Send, ^+m
+;
+;    WinActivate, ahk_id %active_id%
+;
+;    return
 
 
 
@@ -166,34 +223,47 @@ F11::
 ;    Send, {DOWN}
 ;    return
 
-#IfWinActive ahk_class CabinetWClass
-; F4 を押す毎に以下の URL を切り替える
-; ローカル側を開くときは、 others/tb_unc_open 経由で開く事により svn update 等を実施する
-;   file:///C:/alphatc_svn_work/
-;   file://atcserver/svn/alphatc/files/work/
-; ahk_class CabinetWClass == explorer.exe
-F4::
-    WinGet, wid, ID, A
-    windows := ComObjCreate("Shell.Application").Windows()
-    for win in windows {
-        if win.hwnd == wid {
-            name := win.LocationName
-            url  := win.LocationURL
-            hwnd := win.hwnd
-            if SubStr(url, 1, 37) == "file:///E:/takasago/alphatc_svn_work/" {
-                target := "file://atcserver/svn/alphatc/files/work/" + SubStr(url, 1 + 37)
-                win.Navigate(target)
-            } else if SubStr(url, 1, 40) == "file://atcserver/svn/alphatc/files/work/" {
-                ;target := "file:///C:/alphatc_svn_work/" + SubStr(url, 1 + 40)
-                ;win.Navigate(target)
-                ;MsgBox, tb_unc_open --hwnd %wid% %url%
-                ;Run, cmd /c tb_unc_open --hwnd %wid% %url% && pause
-                Run, cmd /c tb_unc_open --hwnd %wid% %url%
-            }
-        }
-    }
-    return
-#IfWinActive
+;#IfWinActive ahk_class CabinetWClass
+;; F4 を押す毎に以下の URL を切り替える
+;; ローカル側を開くときは、 others/tb_unc_open 経由で開く事により svn update 等を実施する
+;;   file:///C:/alphatc_svn_work/
+;;   file://atcserver/svn/alphatc/files/work/
+;; ahk_class CabinetWClass == explorer.exe
+;F4::
+;    WinGet, wid, ID, A
+;
+;    windows := ComObjCreate("Shell.Application").Windows()
+;    for win in windows {
+;        if win.hwnd == wid {
+;            name := win.LocationName
+;            url  := win.LocationURL
+;            hwnd := win.hwnd
+;
+;            path := ""
+;            if SubStr(url, 1, 8) == "file:///" {
+;                path := SubStr(url, 9)
+;            }
+;            clip_org := clipboardAll
+;            Run, copy_fullpath.exe %path%
+;            path := clipboard
+;            MsgBox, %path%
+;            ;:w
+;            ;clipboard := clip_org
+;
+;            if SubStr(path, 1, 20) == "C:\alphatc_svn_work\" {
+;                target := "file://atcserver/svn/alphatc/files/work/" + SubStr(url, 1 + 28)
+;                win.Navigate(target)
+;
+;            } else if SubStr(path, 1, 35) == "\\atcserver\svn\alphatc\files\work\" {
+;                ;target := "file:///C:/alphatc_svn_work/" + SubStr(url, 1 + 40)
+;                ;win.Navigate(target)
+;                MsgBox, tb_unc_open --hwnd %wid% %path%
+;                Run, tb_unc_open --hwnd %wid% file:///%path%
+;            }
+;        }
+;    }
+;    return
+;#IfWinActive
 
 
 ; vi:set et ft=ahk:

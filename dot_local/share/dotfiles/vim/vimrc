@@ -15,8 +15,9 @@ set expandtab
 set nowrap
 set number
 set scrolloff=0
+set errorformat+=%m\	%f
 set errorformat+=%f
-set efm^=%f:%l\\\,%c:%m
+set errorformat^=%f:%l\\\,%c:%m
 
 set fileformats=unix,dos
 set updatetime=300
@@ -359,10 +360,8 @@ let $LANG="ja_JP.UTF-8"
 set shellslash
 
 tnoremap <silent> <s-space> <space>
+set suffixesadd=.json
 
 if has('linux')
     set clipboard=unnamedplus
 endif
-
-nmap <F7> [c
-nmap <F8> ]c
