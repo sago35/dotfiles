@@ -33,7 +33,7 @@ F1::
 
 ; vkBAsc028 => :
 vkBA::Run, ..\fenrir\fenrir.exe, ..\fenrir\
-;#z::Reload
++#z::Reload
 #IfWinExist
 
 ; ------------------------------------------------------------------------------
@@ -41,9 +41,9 @@ vkBA::Run, ..\fenrir\fenrir.exe, ..\fenrir\
 #q::
     Run, %EDITOR% "%A_ScriptFullPath%"
     return
-;#z::
-;    Reload
-;    return
++#z::
+    Reload
+    return
 
 ^[:: Send {ESC}
 ^h:: Send {BS}
