@@ -133,7 +133,8 @@ F18::GetTitle() ; t
 
 PrintScreen::
 {
-    Run('C:\Users\takasago.masaaki\app\rapture\rapture.exe', 'C:\Users\takasago.masaaki\app\rapture')
+    profile := EnvGet("USERPROFILE")
+    Run(profile "\app\rapture\rapture.exe", profile "\app\rapture")
 }
 
 #+z::Reload
