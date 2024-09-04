@@ -117,7 +117,7 @@ F14 Up::EasyWindowResizeEnd()
 F15::WinClose("A") ; w
 F16::Send('{LButton}{LButton}') ; v
 F17::ToggleMaximizeRunner() ; r
-;+F17::ToggleMaximizeRunner()
++F17::ToggleMaximizeRunner()
 F18::GetTitle() ; t
 
 ; その他
