@@ -64,7 +64,7 @@ set mouse=a
 " マウスの移動でフォーカスを自動的に切替えない (mousefocus:切替る)
 set nomousefocus
 " 入力時にマウスポインタを隠す (nomousehide:隠さない)
-set mousehide
+set nomousehide
 " ビジュアル選択(D&D他)を自動的にクリップボードへ (:help guioptions_a)
 set guioptions+=a
 " 非GUIのタブページラインを使用する
