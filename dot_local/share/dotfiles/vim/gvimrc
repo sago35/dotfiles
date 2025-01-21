@@ -126,3 +126,13 @@ nmap - :call Fontsize(-1)<cr>
 
 tmap <2-LeftMouse> <C-W>:
 tmap <MiddleMouse> <C-W>"+
+
+
+" タイトルバーを有効にする
+set title
+
+" 現在のディレクトリをタイトルに表示
+let &titlestring=fnamemodify(getcwd(), ':t')
+
+" カレントディレクトリ変更時にタイトルを更新
+autocmd DirChanged * let &titlestring = fnamemodify(getcwd(), ':t')

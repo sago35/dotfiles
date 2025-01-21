@@ -17,6 +17,8 @@ PrintDate()
     Send(A_YYYY "/" A_MM "/" A_DD)
 }
 
+^F3::ToggleTopmost()
+
 ; 変換キーを半角/全角に
 ;*vk1C::Send('!{vkF3}')
 
@@ -135,6 +137,7 @@ PrintScreen::
 {
     profile := EnvGet("USERPROFILE")
     Run(profile "\app\rapture\rapture.exe", profile "\app\rapture")
+    Sleep(1000)
 }
 
 #+z::Reload
@@ -194,6 +197,15 @@ Enter UP::
 #WheelUp::
 {
     SetTransparent(5)
+}
+
+
+; ----------------------------------------------------------------------------
+; ToggleTopmost
+; ----------------------------------------------------------------------------
+ToggleTopmost() {
+    hWnd := WinGetID("A")
+    WinSetAlwaysOnTop(-1, hWnd)
 }
 
 ; ----------------------------------------------------------------------------
