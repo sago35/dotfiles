@@ -94,13 +94,13 @@ colorscheme molokai
 
 function! MkdirInit()
     if !isdirectory(&directory)
-        call mkdir(&directory)
+        call mkdir(&directory, 'p')
     endif
     if !isdirectory(&backupdir)
-        call mkdir(&backupdir)
+        call mkdir(&backupdir, 'p')
     endif
     if !isdirectory(&undodir)
-        call mkdir(&undodir)
+        call mkdir(&undodir, 'p')
     endif
 endfunction
 
