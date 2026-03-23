@@ -277,8 +277,13 @@ ToggleMaximizeRunner()
 ; ResizeWindow
 ; ----------------------------------------------------------------------------
 ResizeWindow(direction) {
-    ; モニタの作業領域を取得
-    MonitorGetWorkArea(1, &WL, &WT, &WR, &WB)
+    monitorIndex := GetActiveWindowMonitorIndex()
+    if (!monitorIndex) {
+        return
+    }
+
+    ; アクティブウィンドウが載っているモニタの作業領域を取得
+    MonitorGetWorkArea(monitorIndex, &WL, &WT, &WR, &WB)
     if (direction = "up") {
         NewX := WL
         NewY := WT
@@ -327,6 +332,25 @@ ResizeWindow(direction) {
 
     ; ウィンドウの移動とサイズ変更
     WinMove(NewX, NewY, NewW, NewH, "A")
+}
+
+; ----------------------------------------------------------------------------
+; GetActiveWindowMonitorIndex
+; ----------------------------------------------------------------------------
+GetActiveWindowMonitorIndex() {
+    WinGetPos(&X, &Y, &W, &H, "A")
+    CenterX := X + (W // 2)
+    CenterY := Y + (H // 2)
+
+    MonitorCount := MonitorGetCount()
+    Loop MonitorCount {
+        MonitorGetWorkArea(A_Index, &ML, &MT, &MR, &MB)
+        if (ML <= CenterX && CenterX < MR && MT <= CenterY && CenterY < MB) {
+            return A_Index
+        }
+    }
+
+    return 0
 }
 
 ; ----------------------------------------------------------------------------
