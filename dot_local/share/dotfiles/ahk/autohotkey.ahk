@@ -251,7 +251,8 @@ ToggleMaximize(maximizeLevel := 0) {
 
             if (maximizeLevel == 1) {
                 ; maximize without title bar
-                MonitorGetWorkArea(1, &WL, &WT, &WR, &WB)
+                monitorIndex := GetActiveWindowMonitorIndex
+                MonitorGetWorkArea(monitorIndex, &WL, &WT, &WR, &WB)
                 WinMove(WL, WT, WR, WB, WID)
             } else {
                 ; maximize without title bar and task bar
