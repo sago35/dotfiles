@@ -5,17 +5,16 @@
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
+  nnoremap <buffer> gd <plug>(lsp-definition)
+  nnoremap <buffer> <f2> <plug>(lsp-rename)
   inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
 
-  nmap <buffer> ,i :LspHover<cr>
-  nmap <buffer> <C-]> :LspDefinition<cr>
-  nmap <buffer> <C-w><C-]> :sp<cr>:LspDefinition<cr>
-  nmap <buffer> <C-Space>s :LspReferences<CR>:cclose<CR>
-  nmap <buffer> <C-Space><C-Space>s :split<cr>:LspReferences<CR>:cclose<CR>
-  nmap <buffer> ,i :LspHover<CR>
-  nmap <buffer> ,f :LspDocumentFormat<cr>
+  nnoremap <buffer> ,i <plug>(lsp-hover)
+  nnoremap <buffer> <C-]> <plug>(lsp-definition)
+  nnoremap <buffer> <C-w><C-]> :sp<cr><plug>(lsp-definition)
+  nnoremap <buffer> <C-Space>s <plug>(lsp-references):cclose<CR>
+  nnoremap <buffer> <C-Space><C-Space>s :split<cr><plug>(lsp-references):cclose<CR>
+  nnoremap <buffer> ,f <plug>(lsp-document-format)
 endfunction
 
 augroup lsp_install
