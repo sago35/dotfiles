@@ -356,12 +356,16 @@ GetActiveWindowMonitorIndex() {
 ; ----------------------------------------------------------------------------
 ; EasyWindowMove
 ; ----------------------------------------------------------------------------
+global EWM_Enable := false
+global EWM_WID
+global EWM_StartX
+global EWM_StartY
 EasyWindowMoveStart()
 {
-    global EWM_Enable := false
+    global EWM_Enable
     global EWM_WID := WinGetID("A")
-    global EWM_StartX := 0
-    global EWM_StartY := 0
+    global EWM_StartX
+    global EWM_StartY
 
     if (EWM_Enable == false) {
         EWM_Enable := true
@@ -401,12 +405,16 @@ EasyWindowMoveTick()
 ; ----------------------------------------------------------------------------
 ; EasyWindowResize
 ; ----------------------------------------------------------------------------
+global EWR_Enable := false
+global EWR_WID
+global EWR_StartX
+global EWR_StartY
 EasyWindowResizeStart()
 {
-    global EWR_Enable := false
-    global EWR_WID := WinGetID("A")
-    global EWR_StartX := 0
-    global EWR_StartY := 0
+    global EWR_Enable
+    global EWR_WID
+    global EWR_StartX
+    global EWR_StartY
 
     if (EWR_Enable == false) {
         EWR_Enable := true
