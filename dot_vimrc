@@ -2,6 +2,9 @@ set packpath=$HOME/.local/share/vim-plugins/
 let $VIMLOCAL = $HOME . "/.local/share/dotfiles/vim/"
 source $VIMLOCAL/vimrc
 
+" vim/gvim 終了時に terminal を自動で閉じる
+autocmd TerminalOpen * call term_setkill(bufnr(''), 'term')
+
 " for talk
 " あとは、 terminal のテーマを talk に変えておくこと
 "colorscheme zellner
