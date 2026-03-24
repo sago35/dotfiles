@@ -364,4 +364,6 @@ set suffixesadd=.json
 
 if has('linux')
     set clipboard=unnamedplus
+else
+    set clipboard=unnamed
 endif
