@@ -29,3 +29,25 @@ let g:terminal_ansi_colors = [
 \ '#34e2e2',
 \ '#eeeeec',
 \ ]
+
+" 256色モードを強制する
+set t_Co=256
+
+" ターミナルが True Color (24bit) に対応している場合
+if has('termguicolors')
+  set termguicolors
+  " Windows Terminal での背景色バグを防ぐための設定
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+if has("autocmd")
+  " 挿入モード：点滅なしの縦線 (Steady Bar)
+  let &t_SI = "\e[5 q"
+  " 置換モード：点滅なしの下線 (Steady Underline)
+  let &t_SR = "\e[3 q"
+  "let &t_SR = "\e[1 q"
+  " ノーマルモード：点滅なしのブロック (Steady Block)
+  let &t_EI= "\e[1 q"
+  "let &t_EI = "\e[3 q"
+endif
